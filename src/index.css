@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	html {
+		margin: 0;
+		padding: 0;
+	}
+
+	@font-face {
+		font-family: 'Pirate';
+		font-style: normal;
+		font-weight: 100 900;
+		src: url('/fonts/kaloz.woff') format('woff');
+	}
+
+	body {
+		font-family: 'Pirate', sans-serif;
+	}
+}
