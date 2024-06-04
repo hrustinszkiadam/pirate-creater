@@ -16,7 +16,9 @@ const Weapons = () => {
 				{weapons.map((w, i) => (
 					<div
 						key={i}
-						onClick={() => setWeapon(w)}
+						onClick={() =>
+							weapon === w ? setWeapon(null) : setWeapon(w)
+						}
 						className={`cursor-pointer rounded-lg ${
 							weapon === w
 								? 'border-4 border-orange-950'
