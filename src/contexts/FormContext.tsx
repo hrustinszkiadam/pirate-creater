@@ -59,25 +59,18 @@ const FormProvider = ({ children }: PropsWithChildren) => {
 				setCanGoNext(true);
 				break;
 			case 1:
-				if (
-					name === '' ||
-					bounty! > MAX_BOUNTY ||
-					bounty! < 0 ||
-					!bounty ||
-					!validateName()
-				) {
+				setCanGoNext(true);
+				if (!bounty || bounty < 0 || bounty > MAX_BOUNTY)
 					setCanGoNext(false);
-				} else {
-					setCanGoNext(true);
-				}
-				if (bounty! >= 0 && bounty! <= MAX_BOUNTY) setCanGoNext(true);
+				if (name === '' || validateName()) {
+					if (formStatus === 'update' && oldPirate!.name === name)
+						setCanGoNext(true);
+					else setCanGoNext(false);
+				} else if (bounty === 0) setCanGoNext(true);
 				break;
 			case 2:
-				if (!weapon) {
-					setCanGoNext(false);
-				} else {
-					setCanGoNext(true);
-				}
+				if (weapon == null) setCanGoNext(false);
+				else setCanGoNext(true);
 				break;
 			case 3:
 				if (
@@ -86,13 +79,9 @@ const FormProvider = ({ children }: PropsWithChildren) => {
 					atk < 10 ||
 					def < 10 ||
 					sp < 10
-				) {
+				)
 					setCanGoNext(false);
-				} else {
-					setCanGoNext(true);
-				}
-				break;
-			default:
+				else setCanGoNext(true);
 				break;
 		}
 	}, [progress, model, name, bounty, weapon, statPoints, hp, atk, def, sp]);
