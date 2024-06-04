@@ -34,7 +34,8 @@ const FormProvider = ({ children }: PropsWithChildren) => {
 
 	const validateName = () => {
 		const nameExists = pirates.some(
-			(pirate: Pirate) => pirate.name === name,
+			(pirate: Pirate) =>
+				pirate.name.toLowerCase() === name.toLowerCase(),
 		);
 		return nameExists;
 	};
