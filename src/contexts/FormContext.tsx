@@ -5,7 +5,7 @@ import {
 	useState,
 	useEffect,
 } from 'react';
-import Pirate, { model, weapon } from '../pirate.type';
+import Pirate, { model, weapon, isPirate } from '../pirate.type';
 import { usePirateContext } from './PirateContext';
 
 const FormContext = createContext({} as any);
@@ -103,6 +103,11 @@ const FormProvider = ({ children }: PropsWithChildren) => {
 			sp,
 		};
 
+		if (!isPirate(newPirate)) {
+			reset();
+			return;
+		}
+
 		if (formStatus === 'update') update(oldPirate, newPirate);
 		else add(newPirate);
 
@@ -110,6 +115,7 @@ const FormProvider = ({ children }: PropsWithChildren) => {
 	};
 
 	const updatePirate = (pirate: Pirate) => {
+		if (!isPirate(pirate)) return;
 		setModel(pirate.model);
 		setName(pirate.name);
 		setBounty(pirate.bounty);

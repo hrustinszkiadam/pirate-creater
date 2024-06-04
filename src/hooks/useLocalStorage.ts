@@ -1,18 +1,12 @@
-import Pirate from '../pirate.type';
+import Pirate, { isPirate } from '../pirate.type';
 
 const useLocalStorage = () => {
 	const getPirates = (): Array<Pirate> => {
 		const pirates = localStorage.getItem('pirates');
 		if (pirates) {
-			return JSON.parse(pirates);
+			return JSON.parse(pirates).filter(isPirate);
 		}
 		return [];
-	};
-
-	const getPirate = (name: string): Pirate => {
-		const pirates = getPirates();
-		const pirate = pirates.find((p: Pirate) => p.name === name)!;
-		return pirate;
 	};
 
 	const addPirate = (pirate: Pirate): void => {
@@ -42,7 +36,6 @@ const useLocalStorage = () => {
 
 	return {
 		getPirates,
-		getPirate,
 		addPirate,
 		removePirate,
 		updatePirate,

@@ -35,6 +35,7 @@ const ModelSelector = () => {
 				<img
 					src={`/images/pirate-models/${model}.png`}
 					className='h-64 rounded-md lg:h-72'
+					loading='lazy'
 				/>
 				<ChevronRightIcon
 					className='h-10 w-10 cursor-pointer'

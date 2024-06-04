@@ -1,6 +1,6 @@
 import { useContext, createContext, PropsWithChildren, useState } from 'react';
 import useLocalStorage from '../hooks/useLocalStorage';
-import Pirate from '../pirate.type';
+import Pirate, { isPirate } from '../pirate.type';
 
 const PirateContext = createContext({} as any);
 
@@ -16,6 +16,7 @@ const PirateProvider = ({ children }: PropsWithChildren) => {
 	const refresh = () => setPirates(getPirates());
 
 	const add = (pirate: Pirate) => {
+		if (!isPirate(pirate)) return;
 		addPirate(pirate);
 		refresh();
 	};
@@ -31,6 +32,7 @@ const PirateProvider = ({ children }: PropsWithChildren) => {
 	};
 
 	const update = (old: Pirate, updated: Pirate) => {
+		if (!isPirate(updated) || !isPirate(old)) return;
 		const idx = pirates.findIndex((p: Pirate) => p.name === old.name);
 		updatePirate(updated, idx);
 		refresh();
