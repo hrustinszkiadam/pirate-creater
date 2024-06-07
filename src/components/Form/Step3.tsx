@@ -18,9 +18,13 @@ const Step3 = () => {
 	return (
 		<StepWrapper>
 			<h1 className='text-center text-5xl font-bold text-orange-950 lg:text-6xl'>
-				{statPoints >= 0
-					? `Ossz el ${statPoints} pontot !`
-					: `${-statPoints} ponttal túllépted a határt!`}
+				{isNaN(statPoints)
+					? 'Ossz el ? pontot !'
+					: statPoints > 0
+						? `Ossz el ${statPoints} pontot !`
+						: statPoints === 0
+							? 'Elosztottad az összes pontot!'
+							: `${-statPoints} ponttal túllépted a határt!`}
 			</h1>
 			<div className='mt-10 flex w-full flex-col items-center justify-center gap-y-7'>
 				<StatField
